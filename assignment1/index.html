@@ -25,8 +25,7 @@
     font-family: Arial;
     padding-bottom: 50px;
     height: 50px;
-}
-        
+}     
 .navbar a {
   float: left;
   font-size: 16px;
@@ -78,62 +77,57 @@
     
 <body>
 
-<h2>JavaScript</h2>
+<h><b>Assignment 1</b></h><br>
+    <p>Kyle Nisley is 10, Emma Bravard is 20, and Jared Smith is 20.</p>
+    
+<label for="age">Age:</label><br>
+<input type="number" id="age" name="age"><br>
+<label for="lastName">Last Name:</label><br>
+<input type="text" id="lastName" name="lastName"><br>
 
 <button type="button"
-onclick="document.getElementById('demo').innerHTML = Date()">
-Click me to display Date and Time.</button>
+onclick="filterPerson()">
+Click me.</button>
 
-<p id="demo"></p>
+<p id="output"></p>
+
+</body>
     
-<h2>JavaScript Arrays</h2>
-
-<p id="demo2"></p>
-
 <script>
-var person = ["Celia", "Emma", "Jared"];
-document.getElementById("demo2").innerHTML = person;
-</script>
-    
 var person = [
 {
-firstName: "Celia",
-lastName: "Bravard",
-age: 26,
-fullName: function() {
-    return this.firstName + " " + this.lastName;}
+firstName: "Kyle",
+lastName: "Nisley",
+age: 10,
+gender: "male"
 },
 {
 firstName: "Emma",
 lastName: "Bravard",
-age: 23,
-fullName: function() {
-    return this.firstName + " " + this.lastName;}
+age: 20,
+gender: "female"
 },
 {
 firstName: "Jared",
-lastName: "Bravard",
-age: 21,
-fullName: function() {
-    return this.firstName + " " + this.lastName;} 
+lastName: "Smith",
+age: 20,
+gender: "male" 
 }
 ];
 
- <p id="demo3"></p>
-
-<script>
-var person, text, pLen, i;
-person = ["Celia", "Emma", "Jared"];
-pLen = person.length;
-
-text = "<ul>";
-for (i = 0; i < pLen; i++) {
-  text += "<li>" + person[i] + "</li>";
+function filterPerson(){
+    var age=document.getElementById("age").value;
+    var lastName=document.getElementById("lastName").value;
+    
+    var output = "<ul>";
+    
+    for(i=0; i < person.length; i++){
+        if(person[i].age >= age && person[i].lastName == lastName){
+            output += "<li>" + person[i].firstName + "</li>"
+        }
+    }
+    output += "</ul>";
+    document.getElementById("output").innerHTML = output;
 }
-text += "</ul>";
-
-document.getElementById("demo3").innerHTML = text;
 </script>
-
-</body>
 </html> 
