@@ -99,17 +99,20 @@ var person = [
 {
 name: "Celia",
 age: 26,
-order: "first-born"
+fullName: function() {
+    return this.firstName + " " + this.lastName;}
 },
 {
 name: "Emma", 
 age: 23,
-order: "second-born" 
+fullName: function() {
+    return this.firstName + " " + this.lastName;}
 },
 {
 name: "Jared", 
 age: 21,
-order: "last-born" 
+fullName: function() {
+    return this.firstName + " " + this.lastName;} 
 }
 ];
 
