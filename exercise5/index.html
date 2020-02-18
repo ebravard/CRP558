@@ -28,7 +28,7 @@
     
     <br>Pan to <a href="javascript:coralBay()">Coral Bay, Saint John</a><br>
 
-    <a href="javascript:zoomOut()">Zoom out to level 9</a><br>
+    <a href="javascript:zoomOut()">Zoom out to level 7</a><br>
 
     <button id="catherinebergBtn">Explore Catherineberg Ruins</button>
 
@@ -69,12 +69,12 @@
 
         //Pan to Coral Bay
         function coralBay() {
-            map.panTo(new L.LatLng(18.35, -64.716667), 18);
+            map.panTo(new L.LatLng(18.35, -64.716667), 15);
         }
 
         //set Zoom
         function zoomOut() {
-            map.setZoom(9);
+            map.setZoom(7);
         };
 
 
@@ -83,7 +83,7 @@
 
         //Catherineberg Ruins function
         function catherinebergRuins() {
-            map.setView(new L.LatLng(18.346667, -64.761389), 18);
+            map.setView(new L.LatLng(18.346667, -64.761389), 15);
         };    
     </script>
 
