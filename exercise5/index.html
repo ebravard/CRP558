@@ -5,7 +5,7 @@
     <meta name="description" content="LA/CRP 458/558 Leaflet starter file - 2020">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Getting Started with Leaflet</title>
+    <title>Exercise 5</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
         integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
         crossorigin=""/>
@@ -28,13 +28,13 @@
     
     <br>Pan to <a href="javascript:coralBay()">Coral Bay, Saint John</a><br>
 
-    <a href="javascript:zoomOut()">Zoom out to level 5</a><br>
+    <a href="javascript:zoomOut()">Zoom out to level 9</a><br>
 
     <button id="catherinebergBtn">Explore Catherineberg Ruins</button>
 
 
     <script>
-        var map = L.map('mapid').setView([18, -64.7], 13);
+        var map = L.map('mapid').setView([18.333333, -64.733333], 13);
 
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -69,12 +69,12 @@
 
         //Pan to Coral Bay
         function coralBay() {
-            map.panTo(new L.LatLng(18.35, -64.716667));
+            map.panTo(new L.LatLng(18.35, -64.716667), 18);
         }
 
         //set Zoom
         function zoomOut() {
-            map.setZoom(5);
+            map.setZoom(9);
         };
 
 
@@ -83,7 +83,7 @@
 
         //Catherineberg Ruins function
         function catherinebergRuins() {
-            map.setView(new L.LatLng(18.346667, -64.761389), 13);
+            map.setView(new L.LatLng(18.346667, -64.761389), 18);
         };    
     </script>
 
