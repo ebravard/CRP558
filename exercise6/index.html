@@ -15,8 +15,8 @@
 
     <style>
         #map {
-            width: 800px;
-            height: 500px;
+            width: 900px;
+            height: 600px;
         }
         
     </style>
@@ -27,24 +27,24 @@
     <div id='map'></div>
 
     <script>
-        var map = L.map('map').setView([42.02638, -93.64638], 15);
+        var map = L.map('map').setView([42.02638, -93.64638], 14);
 
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 18,
             id: 'mapbox/streets-v11',
-            // This is a unique access token, you must register for your own from https://account.mapbox.com/access-tokens/
+            //access token
             accessToken: 'pk.eyJ1IjoiZWJyYXZhcmQiLCJhIjoiY2s2c2RqbTZ1MDF4djNlcjRzcnE5YWF6MCJ9.h9xSTFWCxt-1PCf9oYGaMQ'
         }).addTo(map);
 
         L.marker([42.026389, -93.646389]).addTo(map)
-            .bindPopup("Welcome to Iowa State University")
+            .bindPopup("Welcome to ISU")
             .openPopup();
         
         //circle at state gym
         var circle = L.circle([42.025123, -93.652869], {
             radius: 100
-            color: "#fff"
+            color: 'yellow'
         }).addTo(map);
         
         //circleMarker at lied gym
@@ -53,8 +53,13 @@
             color: 'orange'
         }).addTo(map);
         
+        //polyline from Reiman Gardens to Vet Med
+        var latlngs = [[42.00981, -93.638809], [42.00683, -93.63244]]; 
+        var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
         
-        
+        //polygon near Veenker Golf Course
+        var latlngs2 = [[42.039, -93.652],[41.039, -93.65],[41.039, -91.67],[42.039, -91.67]];
+        var polygon = L.polygon(latlngs2, {color: 'red'}).addTo(map);
         
     </script>
 
