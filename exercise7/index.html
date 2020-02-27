@@ -68,14 +68,14 @@
         var desMoines = L.marker([41.590833, -93.620833]).bindPopup("Des Moines, IA"),
             urbandale = L.marker([41.636389, -93.736111]).bindPopup("Urbandale"),
             johnston = L.marker([41.671389, -93.705833]).bindPopup("Johnston"),
-            westDesmoines = L.marker([41.575, -93.709167]);
+            westDesmoines = L.marker([41.575, -93.709167]).bindPopup("West Des Moines");
             
         var cities = L.layerGroup([desMoines, urbandale, johnston, westDesmoines]);
         
-        var dsmPublic = L.circle([41.5861, -93.6314], {radius: 100}).bindPopup("Des Moines Public Library"),
-            lhf = L.circle([41.617, -93.771], {radius: 100}).bindPopup("Living History Farms"),
-            bpz = L.circle([41.5193, -93.6242], {radius: 100}).bindPopup("Blank Park Zoo"),
-            jordanCreek = L.circle([41.569722, -93.803333], {radius: 100}).bindPopup("Jordan Creek Town Center");
+        var dsmPublic = L.circle([41.5861, -93.6314], {radius: 200}).bindPopup("Des Moines Public Library"),
+            lhf = L.circle([41.617, -93.771], {radius: 200}).bindPopup("Living History Farms"),
+            bpz = L.circle([41.5193, -93.6242], {radius: 200}).bindPopup("Blank Park Zoo"),
+            jordanCreek = L.circle([41.569722, -93.803333], {radius: 200}).bindPopup("Jordan Creek Town Center");
         
         var activities = L.layerGroup([dsmPublic, lhf, bpz, jordanCreek]);
         
