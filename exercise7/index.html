@@ -59,10 +59,15 @@
 	       attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
         });
         
+        var Stadia_AlidadeSmoothDark = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+	       maxZoom: 20,
+	       attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        });
+        
         var map = L.map('map', {
             center: [41.5908, -93.6208],
             zoom: 11,
-            layers: [OSM, OpenTopoMap]
+            layers: [OSM, OpenTopoMap, Stadia_AlidadeSmoothDark]
         });
 
         var desMoines = L.marker([41.590833, -93.620833]).bindPopup("Des Moines, IA"),
@@ -86,7 +91,8 @@
         
     var overlayMaps = {
         "Cities": cities,
-        "Activities": activities
+        "Activities": activities,
+        "Dark Map": Stadia_AlidadeSmoothDark
     };
         
     L.control.layers(baseMaps, overlayMaps).addTo(map);
