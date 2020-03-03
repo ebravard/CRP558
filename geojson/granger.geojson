@@ -1,0 +1,11 @@
+var granger = {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.82444381713867,
+          41.76196504908719
+        ]
+      }
+    }
