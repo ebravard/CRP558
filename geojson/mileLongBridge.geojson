@@ -1,0 +1,1 @@
+var mileLongBridge = {"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"LineString","coordinates":[[-93.7470245361328,41.75735525044807],[-93.73303413391113,41.763405543251714]]}}]}
