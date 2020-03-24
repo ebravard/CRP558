@@ -1,1 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="description" content="LA/CRP 458/558 Incorportating Leaflet GeoJSON Layers">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Assignment 2</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+    
+    <!-- JavaScript sources -->
+    <script src="../geojson/statesData.geojson"></script>
+    <script src="../geojson/USA_capitals.geojson"></script>
+    <script src="../geojson/USA_cities.geojson"></script>
+    
+    <style>
+        #map {
+            width: 900px;
+            height: 600px;
+        }/* size of map */
+        
+    /* navigation bar style */    
+    .navbar { 
+        overflow: hidden;
+        background-color: #333;
+        font-family: Arial;
+        padding-bottom: 20px; 
+}
+ 
+    .navbar a {
+        float: left;
+        font-size: 16px;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+}
+        
+    /* style for choropleth map legend */    
+    .legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.8;
+}
+    </style>
 
+</head>
+    
+<body>
+    <div class="navbar">
+        <a href="https://ebravard.github.io/CRP558/">Home</a></div>
+    <h1 style="color: cornflowerblue">A Brief Look at the Population of the United States</h1>
+    
+    <div id='map'></div><br>
+    
+    <!-- paragraph briefly describing map project -->
+    <p>The map above shows a variety of ways to view the <b>population of the United States</b>. The approach of the 2020 census is another reminder of how it can be important to consider the country's population over time and see how it changes.  This map specifically demonstrates how population can be viewed in two distinct ways: <em>population density of each state</em> or <em>population of cities throughout the country</em>.<br> In order to zoom out to see the <button id="contiguousBtn">Contiguous United States</button>, click the button.<br> Since Iowa State University is located in Iowa, click this button to zoom to the state of <button id="iowaBtn">Iowa</button>.</p>
+    
+    <!-- image -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/US-Census-2020Logo.png" height="100" width="150" alt="United States Census"><br>
+    Additionally, this is your friendly reminder to fill out the 2020 U.S. Census to be counted!<br><br>
+    
+    <p>Source used to acquire the GeoJSON data for this map was <a href="https://exploratory.io/map">https://exploratory.io/map</a></p>
+    
+    <script>
+        var map = L.map('map', {
+            center: [37.8, -96],
+            zoom: 4
+        });
+        
+    //base maps        
+      var OSM = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            //access token
+            accessToken: 'pk.eyJ1IjoiZWJyYXZhcmQiLCJhIjoiY2s2c2RqbTZ1MDF4djNlcjRzcnE5YWF6MCJ9.h9xSTFWCxt-1PCf9oYGaMQ'
+        }).addTo(map);
+    
+        var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+	       maxZoom: 17,
+	       attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+        });
+   
+//choropleth map showing population density     
+    function getColor(d) {
+    return d > 1000 ? '#7a0177' :
+           d > 500  ? '#ae017e' :
+           d > 200  ? '#dd3497' :
+           d > 100  ? '#f768a1' :
+           d > 50   ? '#fa9fb5' :
+           d > 15   ? '#fcc5c0' :
+                      '#feebe2';
+}
+    function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.density),
+        weight: 2,
+        opacity: 1,
+        color: 'gray',
+        fillOpacity: 0.8
+    };
+}
+   
+//graduated symbols showing population of cities      
+         var geojsonMarkerOptions = {
+            fillColor: "blue",
+            color: "#000",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.7
+        };     
+
+       var usCities = L.geoJSON(cities, {
+            onEachFeature: addPopups,
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, geojsonMarkerOptions);
+            },
+            style: function(feature) {
+                return {
+                  radius: feature.properties.pop/100000,
+                };
+            }
+        });
+
+        function addPopups(feature, layer) {
+            layer.bindPopup('<b>'+feature.properties.name +'</b><br>Population: ' + feature.properties.pop);
+        };
+        
+//defining geoJSON layers
+var states = L.geoJSON(statesData, {style: style}).addTo(map);
+var capitals = L.geoJSON(capitals);
+
+//baseMaps and overlays        
+var baseMaps = {
+    "OpenStreetMap": OSM,
+    "OpenTopoMap": OpenTopoMap
+};
+
+var overlayMaps = {
+    "Population Density": states,
+    "US capitals": capitals,
+    "US cities": usCities
+};
+
+//layer control        
+L.control.layers(baseMaps, overlayMaps).addTo(map);
+ 
+//map legend        
+var legend = L.control({position: 'bottomleft'});
+       
+legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 15, 50, 100, 200, 500, 1000],
+        labels = [];
+
+    // loop through density intervals and generate a label and colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
+    return div;
+};
+
+legend.addTo(map);
+
+//control map legend        
+map.on('overlayadd', function (eventLayer) {
+    // Show the Population Density legend
+    if (eventLayer.name === 'Population Density') {
+        legend.addTo(map);
+    } else { // if any layer is shown besides Pop Density then no legend
+        this.removeControl(legend);
+    }
+});  
+        
+//buttons to different areas of map
+        document.getElementById("contiguousBtn").addEventListener("click", zoomOut);
+        function zoomOut(){
+            map.setZoom(3);
+        };
+        
+        document.getElementById("iowaBtn").addEventListener("click", iowa);
+        function iowa() {
+            map.setView(new L.LatLng(42, -93), 7);
+        };  
+      
+    </script>
+
+</body>
+</html>
