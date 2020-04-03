@@ -60,12 +60,13 @@
             attribution: "Iowa State University GIS Facility &copy; 2020, USDA National Agriculture Imagery Program 2019"
         }).addTo(map);
         
-var baseMaps = {
+var baseMap = {
     "2019 NAIP Natural Color": naip_2019_nc
 };
 
-L.control.layers(baseMaps).addTo(map);
+L.control.layers(baseMap).addTo(map);
         
+L.geocsv('04-02-2020.csv').addTo(map);
     </script>
 
 </body>
