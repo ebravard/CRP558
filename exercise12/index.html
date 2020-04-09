@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+    <meta name="description" content="LA/CRP 458/558 Custom Mapbox Tile Layer">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Exercise 12</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+
+    <style>
+        #map {
+            width: 900px;
+            height: 600px;
+        }
+        
+    .navbar { 
+        overflow: hidden;
+        background-color: #333;
+        font-family: Arial;
+        padding-bottom: 20px; 
+}
+        
+    .navbar a {
+        float: left;
+        font-size: 16px;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+}
+    </style>
+
+</head>
+    
+<body>
+    <div class="navbar">
+        <a href="https://ebravard.github.io/CRP558/">Home</a></div>
+    
+    <div id='map'></div><br>
+    
+    <p>I explored multiple features when making my new customized Mapbox Tile Layer. First, in the map you see above, I selected the Basic base map with the Seashore variation. Next, I increased font size of <i>Points of Interest</i> to 25% and changed the font type of <i>Points of Interest</i> to <b>EB Garamond Bold</b>. I also changed the color of greenspaces to a slightly darker green color and changed the <i>Road Network</i> component from <i>Simple</i> to <i>Navigation</i>.<br><br> For my new layers, I added “road” from Mapbox Streets v8 Source by filtering the feature type to equal “bike_road” to show all roads that have a bike lane on them. I made this bike_road layer a dark red color and made the width of the line 1.25px. The other layer I obtained from Mapbox Streets v8 Source was filtered by “class” to equal “path” to designate sidewalks on campus. I changed the sidewalks to a turquoise color. I also chose to incorporate an outside layer that I made using <a href = "http://geojson.io/#map=2/20.0/0.0">geojson.io</a>. The geoJSON layer created shows major bike racks located on Iowa State University's campus. I uploaded this bike rack layer, changed the color to dark purple, made line width 1.3px, and put the bike rack layer on top of all the other layers.
+</p>
+    
+    
+    <script>
+        var map = L.map('map').setView([42.024, -93.645], 15);
+
+        L.tileLayer('https://api.mapbox.com/styles/v1/ebravard/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'ck8t67xnf03ap1jmn55cd47an',
+            //access token
+            accessToken: 'pk.eyJ1IjoiZWJyYXZhcmQiLCJhIjoiY2s2c2RqbTZ1MDF4djNlcjRzcnE5YWF6MCJ9.h9xSTFWCxt-1PCf9oYGaMQ'
+        }).addTo(map);
+        
+    </script>
+
+</body>
+</html>
