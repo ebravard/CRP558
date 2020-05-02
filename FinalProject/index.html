@@ -72,18 +72,67 @@
         });
         
         var map = L.map('map', {
-            center: [41.5908, -93.6208],
+            center: [41.96, -93.81],
             zoom: 11,
             layers: [OSM, Esri_WorldShadedRelief]
         });
+        
+    var streamStyle = {
+    "color": "blue",
+    "weight": 1,
+    "opacity": 0.65
+    };
+        
+    var fbStyle = {
+        "color":"blue",
+        "weight": 0.5,
+        "opacity": 0.8,
+        "fillOpacity": 0.05
+    };
+     
+    var bioStyle = {
+        "color":"red",
+        "weight": 2,
+        "opacity": 0.8
+    };
+        
+    var satbuffStyle = {
+        "color":"green",
+        "weight": 2,
+        "opacity": 0.8
+    };
+        
+    var nrwStyle = {
+        "color":"orange",
+        "weight": 2,
+        "opacity": 0.8
+    };
+        
+    var gwwStyle = {
+        "color":"pink",
+        "weight": 2,
+        "opacity": 0.8
+    };
 
     var boundary = L.geoJSON(boundary).addTo(map);
-    var fieldBoundaries = L.geoJSON(fieldBoundaries).addTo(map);
-    var streamReach = L.geoJSON(streamReach).addTo(map);
-    var bioreactors = L.geoJSON(bioreactors);
-    var saturatedBuffers = L.geoJSON(saturatedBuffers);
-    var nutrientRemovalWetlands = L.geoJSON(nutrientRemovalWetlands);
-    var grassWaterways = L.geoJSON(grassWaterways);
+    var streamReach = L.geoJSON(streamReach, {
+        style: streamStyle
+            }).addTo(map);
+    var fieldBoundaries = L.geoJSON(fieldBoundaries, {
+        style: fbStyle
+            });
+    var bioreactors = L.geoJSON(bioreactors, {
+        style: bioStyle
+            });
+    var saturatedBuffers = L.geoJSON(saturatedBuffers, {
+        style: satbuffStyle
+            });
+    var nutrientRemovalWetlands = L.geoJSON(nutrientRemovalWetlands, {
+        style: nrwStyle
+            });
+    var grassWaterways = L.geoJSON(grassWaterways, {
+        style: gwwStyle
+            });
     
         
      var baseMaps = {
@@ -93,8 +142,8 @@
         
     var overlayMaps = {
         "Watershed Boundary": boundary,
-        "Field Boundaries": fieldBoundaries,
         "Perennial Stream Reach": streamReach,
+        "Field Boundaries": fieldBoundaries,
         "Bioreactors": bioreactors,
         "Grassed Waterways": grassWaterways,
         "Saturated Buffers": saturatedBuffers,
