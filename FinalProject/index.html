@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="description" content="LA/CRP 458/558 Leaflet Vector Layers">
+    <meta name="description" content="LA/CRP 458/558 Final Project">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Exercise 7</title>
+    <title>Final Project</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
         integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
         crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
         integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
         crossorigin=""></script>
+    
+    <script src="../geojson/boundary.geojson"></script>
+    <script src="../geojson/fieldBoundaries.geojson"></script>
+    <script src="../geojson/streamReach.geojson"></script>
+    <script src="../geojson/saturatedBuffers.geojson"></script>
+    <script src="../geojson/bioreactors.geojson"></script>
+    <script src="../geojson/grassWaterways.geojson"></script>
+    <script src="../geojson/nutrientRemovalWetlands.geojson"></script>
 
     <style>
         #map {
@@ -66,22 +74,17 @@
         var map = L.map('map', {
             center: [41.5908, -93.6208],
             zoom: 11,
-            layers: [OSM, OpenTopoMap]
+            layers: [OSM, Esri_WorldShadedRelief]
         });
 
-        var desMoines = L.marker([41.590833, -93.620833]).bindPopup("Des Moines, IA"),
-            urbandale = L.marker([41.636389, -93.736111]).bindPopup("Urbandale"),
-            johnston = L.marker([41.671389, -93.705833]).bindPopup("Johnston"),
-            westDesmoines = L.marker([41.575, -93.709167]).bindPopup("West Des Moines");
-            
-        var cities = L.layerGroup([desMoines, urbandale, johnston, westDesmoines]);
-        
-        var dsmPublic = L.circle([41.5861, -93.6314], {radius: 200}).bindPopup("Des Moines Public Library"),
-            lhf = L.circle([41.617, -93.771], {radius: 200}).bindPopup("Living History Farms"),
-            bpz = L.circle([41.5193, -93.6242], {radius: 200}).bindPopup("Blank Park Zoo"),
-            jordanCreek = L.circle([41.569722, -93.803333], {radius: 200}).bindPopup("Jordan Creek Town Center");
-        
-        var activities = L.layerGroup([dsmPublic, lhf, bpz, jordanCreek]);
+    var boundary = L.geoJSON(boundary).addTo(map);
+    var fieldBoundaries = L.geoJSON(fieldBoundaries).addTo(map);
+    var streamReach = L.geoJSON(streamReach).addTo(map);
+    var bioreactors = L.geoJSON(bioreactors);
+    var saturatedBuffers = L.geoJSON(saturatedBuffers);
+    var nutrientRemovalWetlands = L.geoJSON(nutrientRemovalWetlands);
+    var grassWaterways = L.geoJSON(grassWaterways);
+    
         
      var baseMaps = {
          "Streets": OSM,
@@ -89,9 +92,13 @@
      };
         
     var overlayMaps = {
-        "Cities": cities,
-        "Activities": activities,
-        "Roads Map": OpenMapSurfer_Roads
+        "Watershed Boundary": boundary,
+        "Field Boundaries": fieldBoundaries,
+        "Perennial Stream Reach": streamReach,
+        "Bioreactors": bioreactors,
+        "Grassed Waterways": grassWaterways,
+        "Saturated Buffers": saturatedBuffers,
+        "Nutrient Removal Wetlands": nutrientRemovalWetlands
     };
         
     L.control.layers(baseMaps, overlayMaps).addTo(map);
