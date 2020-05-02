@@ -58,19 +58,20 @@
     Shown in the map above, BMPs accounted for include grassed waterways, bioreactors, saturated buffers, nutrient removal wetlands, and saturated buffers. Each of these BMPs plays a different role in conservation for agricultural watersheds. Explore the list below to learn more about different best management practices: <br>
         <b>Bioreactors</b> are edge-of field-nitrogen management practices that involve a trench in the ground packed with carbonaceous material such as woodchips that facilitate colonization of soil bacteria that convert nitrate in drainage water to nitrogen gas. Bioreactors have about a 43% nitrate-N reduction rate. Click <button id = "bioBtn">here</button> to view a bioreactor on the map. <br>
         
-        <b>Grassed Waterways</b>
+        <b>Grassed Waterways</b> are
+        Click <button id = "gwwBtn">here</button> to view a grassed waterway on the map. <br>
         
-        <b>Nutrient Removal Wetlands</b>
+        <b>Nutrient Removal Wetlands</b> are engineered nitrate, phosphorus and sediment treatment systems that function under a variety of conditions that can be used to significantly improve water quality in Iowa’s agricultural watersheds. Wetlands slow the movement of water and allow sediment in runoff to settle. These constructed wetlands can intercept tile drainage water and microbial denitrify the nitrate-nitrogen and release it to the atmosphere as nitrogen gas. Nutrient removal wetlands have the potential to remove 40-90% of the nitrate in tile drainage, depending on the nitrate load intercepted by the wetland and the area of the wetland. These systems also provide important habitat to a variety species. 
+        Click <button id = "nrwBtn">here</button> to view a nutrient removal wetland on the map. <br>
         
-        <b>Saturated Buffers</b>
+        <b>Saturated Buffers</b> are 
+        Click <button id = "satbuffBtn">here</button> to view a saturated buffer on the map. <br>
         
-        <button id="contiguousBtn">Contiguous United States</button>, click the button.<br> Since Iowa State University is located in Iowa, click this button to zoom to the state of <button id="iowaBtn">Iowa</button>.</p>
-    
+    <br>
     <!-- image -->
-    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/US-Census-2020Logo.png" height="100" width="150" alt="United States Census"><br>
-    Additionally, this is your friendly reminder to fill out the 2020 U.S. Census to be counted!<br><br>
-    
-    <p>Source used to acquire the GeoJSON data for this map was <a href="https://exploratory.io/map">https://exploratory.io/map</a></p>
+    <img src= "acpf.JPG" height="50" width="150" alt="USDA ACPF logo">
+    <p>Source used to acquire the data for this map was the <a href="https://benson.gis.iastate.edu/ACPF/dwnldACPF.html">ACPF Watershed Database</a>.<br>
+    Information regarding BMPs can be found on Iowa State's website about the <a href="https://www.nrem.iastate.edu/bmpcosttools/"> Nutrient Reduction Strategy Decision Support Tool</a></p>
     
 
     <script>
@@ -178,22 +179,22 @@
  //buttons to different areas of map
     document.getElementById("bioBtn").addEventListener("click", bio);
         function bio(){
-            map.setView(new L.LatLng(41.96, -93.81), 15);
+            map.setView(new L.LatLng(41.944497796891817, -93.78298175511847), 13);
         };
         
     document.getElementById("gwwBtn").addEventListener("click", gww);
         function gww() {
-            map.setView(new L.LatLng(41.96, -93.81), 15);
+            map.setView(new L.LatLng(42.056349877139681, -93.838735244019148), 13);
         };  
         
     document.getElementById("nrwBtn").addEventListener("click", nrw);
         function nrw() {
-            map.setView(new L.LatLng(41.96, -93.81), 15);
+            map.setView(new L.LatLng(41.897418776759743, -93.732169399261949), 13);
         };
         
     document.getElementById("satbuffBtn").addEventListener("click", satbuff);
         function satbuff() {
-            map.setView(new L.LatLng(41.96, -93.81), 15);
+            map.setView(new L.LatLng(41.925603839812339, -93.756709215945534), 13);
         };
         
     </script>
